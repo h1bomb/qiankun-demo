@@ -1,0 +1,14 @@
+{
+  "name": "qiankun-demo",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r --parallel run dev",
+    "build": "rm -rf dist && pnpm -r run build",
+    "serve": "serve -l 5001 --config serve.json"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "serve": "^14.2.1",
+    "typescript": "^5.2.2"
+  }
+}
