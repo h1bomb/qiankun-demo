@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [input, setInput] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim()) {
       setTodos([...todos, { id: Date.now(), text: input, completed: false }]);
@@ -12,7 +18,7 @@ function App() {
     }
   };
 
-  const toggleTodo = (id) => {
+  const toggleTodo = (id: number) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -20,7 +26,7 @@ function App() {
     );
   };
 
-  const deleteTodo = (id) => {
+  const deleteTodo = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 

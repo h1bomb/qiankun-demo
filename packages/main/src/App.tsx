@@ -38,10 +38,12 @@ export default function App() {
           borderRadius: '8px',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
         }}>
-          <Routes>
-            <Route path="/todo" element={<div id="todo-container" />} />
-            <Route path="/counter" element={<div id="counter-container" />} />
-          </Routes>
+          <div id="subapp-viewport" data-testid="subapp-viewport">
+            <Routes>
+              <Route path="/todo" element={<div id="todo-container" />} />
+              <Route path="/counter" element={<div id="counter-container" />} />
+            </Routes>
+          </div>
         </div>
       </div>
     </BrowserRouter>
@@ -68,4 +70,3 @@ registerMicroApps([
 
 start();
 setDefaultMountApp('/todo');
-
