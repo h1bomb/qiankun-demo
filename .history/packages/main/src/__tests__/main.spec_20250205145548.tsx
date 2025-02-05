@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { registerMicroApps, start } from 'qiankun'
 
 // Mock qiankun
 vi.mock('qiankun', () => ({

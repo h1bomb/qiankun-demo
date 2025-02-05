@@ -14,7 +14,6 @@ export default defineConfig({
     port: 5174,
     cors: true
   },
-  base: '/todo/',
   build: {
     outDir: '../../dist/todo',
     sourcemap: true,
@@ -23,6 +22,10 @@ export default defineConfig({
         'todo-list': resolve(__dirname, 'index.html')
       },
       output: {
+        // 确保 React 相关依赖被正确打包
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom']
+        },
         format: 'umd',
         entryFileNames: (chunkInfo) => {
           return '[name]-[hash].js'

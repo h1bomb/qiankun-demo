@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Todo {
   id: number;
@@ -6,9 +6,43 @@ interface Todo {
   completed: boolean;
 }
 
-function App() {
+interface AppProps {
+  registerMicroApps?: (apps: any[], lifecycle?: any) => void;
+}
+
+function App({ registerMicroApps }: AppProps) {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [input, setInput] = useState('');
+
+  useEffect(() => {
+    if (registerMicroApps) {
+      registerMicroApps([
+        {
+          name: 'todo-app',
+          entry: '//localhost:5174',
+          container: '#todo-container',
+          activeRule: '/todo',
+          props: {
+            baseUrl: '/todo'
+          }
+        },
+        {
+          name: 'counter-app',
+          entry: '//localhost:5175',
+          container: '#counter-container',
+          activeRule: '/counter',
+          props: {
+            baseUrl: '/counter'
+          }
+        }
+      ], {
+        beforeLoad: [],
+        beforeMount: [],
+        afterMount: [],
+        afterUnmount: []
+      });
+    }
+  }, [registerMicroApps]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -14,7 +14,6 @@ export default defineConfig({
     port: 5174,
     cors: true
   },
-  base: '/todo/',
   build: {
     outDir: '../../dist/todo',
     sourcemap: true,

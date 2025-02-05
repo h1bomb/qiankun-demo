@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../App'
@@ -76,5 +76,36 @@ describe('Todo List App', () => {
     
     await userEvent.type(input, '测试任务')
     expect(input.value).toBe('测试任务')
+  })
+
+  it('registers micro apps', () => {
+    const registerMicroApps = vi.fn();
+    render(<App registerMicroApps={registerMicroApps} />);
+    expect(registerMicroApps).toHaveBeenCalledWith([
+      {
+        name: 'todo-app',
+        entry: '//localhost:5174',
+        container: '#todo-container',
+        activeRule: '/todo',
+        props: {
+          baseUrl: '/todo'
+        }
+      },
+      {
+        name: 'counter-app',
+        entry: '//localhost:5175',
+        container: '#counter-container',
+        activeRule: '/counter',
+        props: {
+          baseUrl: '/counter'
+        }
+      }
+    ],
+    {
+      beforeLoad: expect.any(Array),
+      beforeMount: expect.any(Array),
+      afterMount: expect.any(Array),
+      afterUnmount: expect.any(Array)
+    });
   })
 })
